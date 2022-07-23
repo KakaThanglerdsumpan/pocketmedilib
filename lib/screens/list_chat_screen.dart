@@ -10,7 +10,7 @@ class ListChatScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    return StreamBuilder<List<Convo?>>(
+    return StreamBuilder<List<Chat?>>(
       stream: ref.read(databaseProvider)!.getChats(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
