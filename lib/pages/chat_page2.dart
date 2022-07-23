@@ -3,22 +3,25 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 // import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:uuid/uuid.dart';
+// import 'package:pocketmedi/models/chat.dart' as models;
+// import 'package:pocketmedi/models/message.dart' as models;
 
-// import '../services/bot_service.dart';
 
-// class ChatPage2 extends StatefulWidget {
-//   const ChatPage2({Key? key}) : super(key: key);
+// class ChatScreen extends ConsumerStatefulWidget {
+//   final models.Chat chat;
+//   const ChatScreen({required this.chat, Key? key}) : super(key: key);
 
 //   @override
-//   _ChatPage2State createState() => _ChatPage2State();
+//   ConsumerState<ConsumerStatefulWidget> createState() => _ChatScreenState();
 // }
 
-// class _ChatPage2State extends State<ChatPage2> {
+// class _ChatScreenState extends ConsumerState<ChatScreen>
+//     with SingleTickerProviderStateMixin {
 //   List<types.Message> messages = [];
 //   final _user = const types.User(id: '1234556');
-//   final _bot = const types.User(id: "123");
-// //id of bot and user doesn't matter here as we have only pair interaction
+//   final _other = const types.User(id: '123');
 
 //   @override
 //   void initState() {
@@ -26,48 +29,36 @@
 //     _loadMessages();
 //   }
 
-//   // This function interacts with bot_service.dart which further interacts 
-//   // with LEX API to get the result of the message sent by the user.
-//   void _addMessage(types.Message message) async {
-//     setState(() {
-//       messages.insert(0, message);
-//     });
-//     log("${message.toJson()["text"]}");
-//     var data = await _botService.callBot(message.toJson()["text"]);
-//     log("#####${data['message']}");
-//     setState(() {
-//       messages.insert(0, botMessageReply(data['message']));
-//     });
-//   }
-
-//   types.Message botMessageReply(String message) {
+//   types.Message otherMessageReply(String message) {
 //     return types.TextMessage(
-//       author: _bot,
+//       author: _other,
 //       createdAt: DateTime.now().millisecondsSinceEpoch,
 //       id: const Uuid().v4(),
 //       text: message,
 //     );
 //   }
 
-//   void _handleSendPressed(types.PartialText message) {
+//   void _handleSendPressed(types.PartialText message) async {
 //     final textMessage = types.TextMessage(
 //       author: _user,
 //       createdAt: DateTime.now().millisecondsSinceEpoch,
 //       id: const Uuid().v4(),
 //       text: message.text,
 //     );
-//     _addMessage(textMessage);
+//     await ref.read(databaseProvider)!.sendMessage(
+//         widget.chat.chatId,
+//             models.Message(
+//                 text: message.text,
+//                 myUid: ref.read(firebaseAuthProvider).currentUser!.uid,
+//                 time: DateTime.now().toString()));
+//       }
 //   }
-
-//   //This function load messages from the firebase/local file.
-//   // Here I am pushing a starting message which will be instantiated
-//   // by the bot when user opens this bot.
 
 //   void _loadMessages() async {
 //     List<types.Message> messagesList = [];
 //     Future.delayed(Duration(milliseconds: 300), () {
 //       messagesList.add(types.TextMessage(
-//         author: _bot,
+//         author: _other,
 //         createdAt: DateTime.now().millisecondsSinceEpoch,
 //         id: const Uuid().v4(),
 //         text: "Hello. My name is Medi - your bot. How can I help you?",
@@ -86,7 +77,7 @@
 //           leading: BackButton(
 //             onPressed: () => Navigator.pop(context),
 //           ),
-//           automaticallyImplyLeading: false,
+//           //automaticallyImplyLeading: false,
 //           title: const Text("Medi"),
 //           backgroundColor: Colors.indigo),
 //       body: Chat(

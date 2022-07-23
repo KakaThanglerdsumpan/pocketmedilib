@@ -31,9 +31,9 @@ class _BotScreenState extends State<BotScreen> {
     setState(() {
       messages.insert(0, message);
     });
-    log("${message.toJson()["text"]}");
+    log("USER: ${message.toJson()["text"]}");
     var data = await _botService.callBot(message.toJson()["text"]);
-    log("#####${data['message']}");
+    log("LEX: ${data['message']}");
     setState(() {
       messages.insert(0, botMessageReply(data['message']));
     });
