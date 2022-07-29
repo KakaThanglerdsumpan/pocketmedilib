@@ -5,12 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pie_chart/pie_chart.dart';
-import 'package:pocketmedi/models/analysis.dart';
-import 'package:pocketmedi/models/chat.dart';
 import 'package:pocketmedi/providers.dart';
 import 'package:pocketmedi/services/bot.dart';
-import 'package:pocketmedi/services/dashbaord_service.dart';
-import 'package:provider/provider.dart';
+import 'package:pocketmedi/services/dashboard_service.dart';
 
 import '../models/local.dart';
 
