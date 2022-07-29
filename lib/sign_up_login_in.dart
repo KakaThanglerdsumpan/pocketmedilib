@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketmedi/providers.dart';
+import 'package:pocketmedi/services/bot.dart';
 
 class SignUpLogIn extends ConsumerWidget {
   const SignUpLogIn({Key? key}) : super(key: key);
@@ -71,6 +72,13 @@ class SignUpLogIn extends ConsumerWidget {
                                       .createUserWithEmailAndPassword(
                                           email: emailController.text,
                                           password: pwdController.text);
+                                  await ref.read(databaseProvider)?.startChat(
+                                      ref
+                                          .read(firebaseAuthProvider)
+                                          .currentUser!
+                                          .uid,
+                                      bot.uid,
+                                      bot.name);
                                 } catch (e) {}
 
                                 Navigator.pop(context);
