@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketmedi/screens/dashboard.dart';
 import 'package:pocketmedi/pages/select_person_to_chat_page.dart';
 import 'package:pocketmedi/providers.dart';
 import 'package:pocketmedi/screens/list_chat_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Home extends ConsumerStatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _HomeState extends ConsumerState<Home>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, initialIndex: 1, length: 3);
+    _tabController = TabController(vsync: this, initialIndex: 0, length: 2);
   }
 
   @override
@@ -42,8 +42,7 @@ class _HomeState extends ConsumerState<Home>
           unselectedLabelColor: Colors.white,
           tabs: const <Widget>[
             Tab(text: "CHATS"),
-            Tab(text: "STATUS"),
-            Tab(text: "CALLS"),
+            Tab(text: "DASHBOARD"),
           ],
         ),
         actions: <Widget>[
@@ -82,10 +81,9 @@ class _HomeState extends ConsumerState<Home>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const <Widget>[
-          ListChatScreen(),
-          OtherTab(tabName: "Status"),
-          OtherTab(tabName: "Calls"),
+        children: <Widget>[
+          const ListChatScreen(),
+          Dashboard(),
         ],
       ),
       floatingActionButton: FloatingActionButton(

@@ -48,6 +48,7 @@ dependencies:
   amazon_cognito_identity_dart_2: ^3.0.0
   dio: ^4.0.6
   chopper: ^4.0.6
+  pie_chart: ^5.3.2
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pocketmedi/models/analysis.dart';
 import 'package:pocketmedi/models/message.dart';
+import 'package:pocketmedi/models/message_with_bot.dart';
+import 'package:pocketmedi/models/sumOfLabels.dart';
 
 import '../models/chat.dart';
 import '../models/user_data.dart';
@@ -65,8 +71,17 @@ class FirestoreService {
             }).toList());
   }
 
-  // send a chat message
+  // stores a chat message inside firebase
   Future<void> sendMessage(String chatId, Message message) async {
+    await firestore
+        .collection("chats")
+        .doc(chatId)
+        .collection("messages")
+        .add(message.toJson());
+  }
+
+  // stores a chat message sent to the bot alongside its analysis inside firebase
+  Future<void> sendMessageWBot(String chatId, MessageWBot message) async {
     await firestore
         .collection("chats")
         .doc(chatId)

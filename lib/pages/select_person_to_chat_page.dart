@@ -4,6 +4,7 @@ import 'package:pocketmedi/models/user_data.dart';
 import 'package:pocketmedi/providers.dart';
 
 import '../models/chat.dart';
+import '../services/bot.dart';
 import 'chat_page.dart';
 
 class SelectPersonToChat extends ConsumerWidget {
@@ -37,7 +38,7 @@ class SelectPersonToChat extends ConsumerWidget {
                 final myUser =
                     ref.read(firebaseAuthProvider).currentUser!; // type User
                 // if the user is the same as the current user, don't show it
-                if (user.uid == myUser.uid) {
+                if (user.uid == myUser.uid || user.uid == bot.uid) {
                   return Container();
                 }
                 return Column(

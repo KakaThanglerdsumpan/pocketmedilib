@@ -1,20 +1,44 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketmedi/models/analysis.dart';
 import 'package:pocketmedi/models/chat.dart';
 import 'package:pocketmedi/models/message.dart';
+import 'package:pocketmedi/models/message_with_bot.dart';
 import 'package:pocketmedi/providers.dart';
+import 'package:pocketmedi/services/bot.dart';
+import 'package:http/http.dart' as http;
+import 'package:pocketmedi/services/bot_service.dart';
 
-class ChatPage extends ConsumerStatefulWidget {
+class BotPage extends ConsumerStatefulWidget {
   final Chat chat;
-  const ChatPage({required this.chat, Key? key}) : super(key: key);
+  const BotPage({required this.chat, Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ChatPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _BotPageState();
 }
 
-class _ChatPageState extends ConsumerState<ChatPage>
+class _BotPageState extends ConsumerState<BotPage>
     with SingleTickerProviderStateMixin {
   final _textMessageController = TextEditingController();
+  final BotService _botService = BotService();
+
+  void _addMessage(String message) async {
+    log("USER: $message");
+    var data = await _botService.callBot(message);
+    log("LEX: ${data['message']}");
+
+    await ref.read(databaseProvider)!.sendMessage(
+          widget.chat.chatId,
+          Message(
+            text: data['message'],
+            myUid: bot.uid,
+            time: DateTime.now().toString(),
+          ),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +80,25 @@ class _ChatPageState extends ConsumerState<ChatPage>
                         final messages = snapshot.data ?? [];
                         return ListView.builder(
                           reverse: true,
-                          itemCount: messages.length,
+                          itemCount: messages.length + 2,
                           itemBuilder: (_, index) {
+                            if (index == (messages.length + 1)) {
+                              return Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: otherChatBubble(Message(
+                                      text:
+                                          "Hi! I'm Mei, your virtual assistant. \n\nFeel free to chat with me whenever you'd like. Always happy to listen :)",
+                                      myUid: bot.uid,
+                                      time: DateTime.now().toString())));
+                            }
+                            if (index == messages.length) {
+                              return Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: otherChatBubble(Message(
+                                      text: "How are you doing today?",
+                                      myUid: bot.uid,
+                                      time: DateTime.now().toString())));
+                            }
                             final message = messages[index];
                             final isMe = message.myUid ==
                                 ref.read(firebaseAuthProvider).currentUser!.uid;
@@ -88,7 +129,7 @@ class _ChatPageState extends ConsumerState<ChatPage>
       margin:
           const EdgeInsets.only(left: 50.0, right: 15.0, top: 7.0, bottom: 7.0),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 216, 222, 255),
+        color: Color.fromARGB(255, 216, 222, 255),
         boxShadow: [
           BoxShadow(
             offset: const Offset(0, 5),
@@ -183,13 +224,52 @@ class _ChatPageState extends ConsumerState<ChatPage>
             InkWell(
               onTap: () async {
                 if (_textMessageController.text.isNotEmpty) {
-                  await ref.read(databaseProvider)!.sendMessage(
-                      widget.chat.chatId,
-                      Message(
+                  // call api method
+                  Future<http.Response> getSentiment(String text) async {
+                    return await http.post(
+                      Uri.parse('https://api.pocketmedi.live/'),
+                      headers: <String, String>{
+                        'Content-Type': 'application/json; charset=UTF-8',
+                      },
+                      body: jsonEncode(<String, String>{'Sentence': text}),
+                    );
+                  }
+
+                  // sends message to api for analysis
+                  http.Response djangoResponses =
+                      await getSentiment(_textMessageController.text);
+                  log(djangoResponses.body);
+
+                  // processes output from api
+                  Analysis result =
+                      Analysis.fromJson(json.decode(djangoResponses.body));
+                  String stringValues = result.ptsdValues.toString();
+                  var splitted = stringValues.split('[');
+                  var splitted2 = splitted[2].split(']');
+                  var splitted3 = splitted2[0].split(', ');
+                  List<double> ptsdValues = [
+                    double.parse(splitted3[0]),
+                    double.parse(splitted3[1]),
+                    double.parse(splitted3[2]),
+                  ];
+
+                  // stores message along with analysis inside firestore
+                  await ref.read(databaseProvider)!.sendMessageWBot(
+                        widget.chat.chatId,
+                        MessageWBot(
                           text: _textMessageController.text,
                           myUid:
                               ref.read(firebaseAuthProvider).currentUser!.uid,
-                          time: DateTime.now().toString()));
+                          time: DateTime.now().toString(),
+                          valueSentiment: result.valueSentiment,
+                          sentiment: result.sentiment,
+                          ptsdScore: ptsdValues[0],
+                          unpredScore: ptsdValues[1],
+                          noScore: ptsdValues[2],
+                        ),
+                      );
+
+                  _addMessage(_textMessageController.text);
                   _textMessageController.clear();
                 }
               },

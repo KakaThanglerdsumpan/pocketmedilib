@@ -25,8 +25,10 @@ class MyApp extends ConsumerWidget {
       title: 'PocketMedi',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 8, 1, 33)),
+        colorScheme: ColorScheme.fromSeed(
+          primary: Colors.indigo,
+          seedColor: Color.fromARGB(255, 8, 1, 33),
+        ),
       ),
       home: AuthWidget(
         signedInBuilder: (context) => const Home(),
