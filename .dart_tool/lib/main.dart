@@ -27,7 +27,7 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           primary: Colors.indigo,
-          seedColor: Color.fromARGB(255, 8, 1, 33),
+          seedColor: const Color.fromARGB(255, 8, 1, 33),
         ),
       ),
       home: AuthWidget(

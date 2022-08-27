@@ -44,39 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBFnpfMr-ztdiFec4bcC-533jWYQh3Tdfw',
-    appId: '1:967439380480:web:2ced747e5b5da149fa28e5',
-    messagingSenderId: '967439380480',
-    projectId: 'pocketmedi0',
-    authDomain: 'pocketmedi0.firebaseapp.com',
-    storageBucket: 'pocketmedi0.appspot.com',
+    apiKey: 'AIzaSyD3qPRiXnvpVcwCC5fOpRUR9qvLEMQq3kM',
+    appId: '1:294622407807:web:7517bc3130ad82e921e34a',
+    messagingSenderId: '294622407807',
+    projectId: 'pocketmedi-caac6',
+    authDomain: 'pocketmedi-caac6.firebaseapp.com',
+    storageBucket: 'pocketmedi-caac6.appspot.com',
+    measurementId: 'G-1B6XZ0EWHS',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCN8s4NKE6_9wb4H9jV4xyz4J5xK9NT5iI',
-    appId: '1:967439380480:android:bce741ff2b0ef6c2fa28e5',
-    messagingSenderId: '967439380480',
-    projectId: 'pocketmedi0',
-    storageBucket: 'pocketmedi0.appspot.com',
+    apiKey: 'AIzaSyDt-CiQy5JqTxoktOE4xXdL0-Lf5aG9Rk8',
+    appId: '1:294622407807:android:eaada9d8cc3c2d2321e34a',
+    messagingSenderId: '294622407807',
+    projectId: 'pocketmedi-caac6',
+    storageBucket: 'pocketmedi-caac6.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDWt9tDFDB4JGPpEiheUkRfRYKhTH9zzQY',
-    appId: '1:967439380480:ios:5ab527598c1b0907fa28e5',
-    messagingSenderId: '967439380480',
-    projectId: 'pocketmedi0',
-    storageBucket: 'pocketmedi0.appspot.com',
-    iosClientId: '967439380480-ig42b05esd8v76ssotvti6m49sin01k7.apps.googleusercontent.com',
+    apiKey: 'AIzaSyD2JDFckeHHjg9qXteGhZNzHEWCG8nPTxs',
+    appId: '1:294622407807:ios:eb1e3f90a0ccbda221e34a',
+    messagingSenderId: '294622407807',
+    projectId: 'pocketmedi-caac6',
+    storageBucket: 'pocketmedi-caac6.appspot.com',
+    iosClientId: '294622407807-2fka66pk5kbngj574td6310ds05ngm1m.apps.googleusercontent.com',
     iosBundleId: 'com.example.pocketmedi',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDWt9tDFDB4JGPpEiheUkRfRYKhTH9zzQY',
-    appId: '1:967439380480:ios:5ab527598c1b0907fa28e5',
-    messagingSenderId: '967439380480',
-    projectId: 'pocketmedi0',
-    storageBucket: 'pocketmedi0.appspot.com',
-    iosClientId: '967439380480-ig42b05esd8v76ssotvti6m49sin01k7.apps.googleusercontent.com',
+    apiKey: 'AIzaSyD2JDFckeHHjg9qXteGhZNzHEWCG8nPTxs',
+    appId: '1:294622407807:ios:eb1e3f90a0ccbda221e34a',
+    messagingSenderId: '294622407807',
+    projectId: 'pocketmedi-caac6',
+    storageBucket: 'pocketmedi-caac6.appspot.com',
+    iosClientId: '294622407807-2fka66pk5kbngj574td6310ds05ngm1m.apps.googleusercontent.com',
     iosBundleId: 'com.example.pocketmedi',
   );
 }

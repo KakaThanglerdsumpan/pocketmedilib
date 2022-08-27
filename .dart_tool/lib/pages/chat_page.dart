@@ -43,7 +43,6 @@ class _ChatPageState extends ConsumerState<ChatPage>
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: SafeArea(
-          bottom: false,
           child: Column(children: [
             Expanded(
                 child: StreamBuilder<List<Message>>(
@@ -134,7 +133,7 @@ class _ChatPageState extends ConsumerState<ChatPage>
 
   Widget sendMessageField() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
+      margin: const EdgeInsets.only(bottom: 5, left: 10, right: 10, top: 15),
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -151,10 +150,6 @@ class _ChatPageState extends ConsumerState<ChatPage>
           children: [
             const SizedBox(
               width: 10,
-            ),
-            Icon(
-              Icons.insert_emoticon,
-              color: Colors.grey[500],
             ),
             const SizedBox(
               width: 10,

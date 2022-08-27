@@ -1,22 +1,22 @@
-class MessageWBot {
+class Message {
   String text;
   String myUid;
   String time;
-  int valueSentiment;
-  String sentiment;
-  double ptsdScore;
-  double unpredScore;
-  double noScore;
+  dynamic valueSentiment;
+  dynamic sentiment;
+  dynamic ptsdScore;
+  dynamic unpredScore;
+  dynamic noScore;
 
-  MessageWBot(
+  Message(
       {required this.text,
       required this.myUid,
       required this.time,
-      required this.valueSentiment,
-      required this.sentiment,
-      required this.ptsdScore,
-      required this.unpredScore,
-      required this.noScore});
+      this.valueSentiment,
+      this.sentiment,
+      this.ptsdScore,
+      this.unpredScore,
+      this.noScore});
 
   // to json
   Map<String, dynamic> toJson() {
@@ -33,8 +33,8 @@ class MessageWBot {
   }
 
   // from json
-  factory MessageWBot.fromJson(Map<String, dynamic> json) {
-    return MessageWBot(
+  factory Message.fromJson(Map<String, dynamic> json) {
+    return Message(
       text: json['text'],
       myUid: json['myUid'],
       time: json['time'],
