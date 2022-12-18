@@ -22,7 +22,7 @@ class _UsersChatState extends ConsumerState<UsersChat>
   // call api method
   Future<http.Response> getSentiment(String text) async {
     return await http.post(
-      Uri.parse('https://api.pocketmedi.live/'),
+      Uri.parse('https://ml.api.pocketmedi.live/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

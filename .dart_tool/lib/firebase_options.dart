@@ -44,40 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD3qPRiXnvpVcwCC5fOpRUR9qvLEMQq3kM',
-    appId: '1:294622407807:web:7517bc3130ad82e921e34a',
-    messagingSenderId: '294622407807',
-    projectId: 'pocketmedi-caac6',
-    authDomain: 'pocketmedi-caac6.firebaseapp.com',
-    storageBucket: 'pocketmedi-caac6.appspot.com',
-    measurementId: 'G-1B6XZ0EWHS',
+    apiKey: 'AIzaSyAOsv9fl_gGekigKUCPwJTiOh9uwVSwIys',
+    appId: '1:478598579251:web:167449ce18e109334f4f46',
+    messagingSenderId: '478598579251',
+    projectId: 'pocketmedi000',
+    authDomain: 'pocketmedi000.firebaseapp.com',
+    storageBucket: 'pocketmedi000.appspot.com',
+    measurementId: 'G-DMNE45HKF1',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDt-CiQy5JqTxoktOE4xXdL0-Lf5aG9Rk8',
-    appId: '1:294622407807:android:eaada9d8cc3c2d2321e34a',
-    messagingSenderId: '294622407807',
-    projectId: 'pocketmedi-caac6',
-    storageBucket: 'pocketmedi-caac6.appspot.com',
+    apiKey: 'AIzaSyBgZ6zBMCe05H4J_jx-ileik08UwKHUtSo',
+    appId: '1:478598579251:android:1983249d2b3bf2294f4f46',
+    messagingSenderId: '478598579251',
+    projectId: 'pocketmedi000',
+    storageBucket: 'pocketmedi000.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD2JDFckeHHjg9qXteGhZNzHEWCG8nPTxs',
-    appId: '1:294622407807:ios:eb1e3f90a0ccbda221e34a',
-    messagingSenderId: '294622407807',
-    projectId: 'pocketmedi-caac6',
-    storageBucket: 'pocketmedi-caac6.appspot.com',
-    iosClientId: '294622407807-2fka66pk5kbngj574td6310ds05ngm1m.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCsFcUQEQo4IIV2G22O5dpj5U1uoRJqQYc',
+    appId: '1:478598579251:ios:9510c558af6912464f4f46',
+    messagingSenderId: '478598579251',
+    projectId: 'pocketmedi000',
+    storageBucket: 'pocketmedi000.appspot.com',
+    iosClientId: '478598579251-epqfojm532h33n55km948affpf7tiv9h.apps.googleusercontent.com',
     iosBundleId: 'com.example.pocketmedi',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyD2JDFckeHHjg9qXteGhZNzHEWCG8nPTxs',
-    appId: '1:294622407807:ios:eb1e3f90a0ccbda221e34a',
-    messagingSenderId: '294622407807',
-    projectId: 'pocketmedi-caac6',
-    storageBucket: 'pocketmedi-caac6.appspot.com',
-    iosClientId: '294622407807-2fka66pk5kbngj574td6310ds05ngm1m.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCsFcUQEQo4IIV2G22O5dpj5U1uoRJqQYc',
+    appId: '1:478598579251:ios:9510c558af6912464f4f46',
+    messagingSenderId: '478598579251',
+    projectId: 'pocketmedi000',
+    storageBucket: 'pocketmedi000.appspot.com',
+    iosClientId: '478598579251-epqfojm532h33n55km948affpf7tiv9h.apps.googleusercontent.com',
     iosBundleId: 'com.example.pocketmedi',
   );
 }
